@@ -135,3 +135,30 @@
     shape=controlvalve
   }
 }
+
+%%% pipe %%%
+\pgfdeclareshape{pipe}{
+  \inheritsavedanchors[from=rectangle]
+  \inheritanchorborder[from=rectangle]
+  \inheritanchor[from=rectangle]{center}
+  \inheritanchor[from=rectangle]{north}
+  \inheritanchor[from=rectangle]{south}
+  \inheritanchor[from=rectangle]{west}
+  \inheritanchor[from=rectangle]{east}
+  \backgroundpath{
+    % store lower right in xa/ya and upper right in xb/yb
+    \southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+    \northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{0}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{0}}
+  }
+}
+\tikzset{circuit declare symbol = pi}
+\tikzset{set pi graphic = pi graphic}
+\tikzset{pi graphic/.style= {
+    transform shape,
+    draw,
+    shape=pipe
+  }
+}
