@@ -36,6 +36,7 @@ This package defines four new symbols for common elements in natural
 gas networks:
 
 \begin{itemize}
+\item[pi] Pipes
 \item[cs] Compressors
 \item[va] Valves
 \item[cv] Control valves
@@ -48,6 +49,7 @@ Requires pgf with circuits library, e.g., version 2.10.
   \centering
   \begin{lstlisting}
     \begin{tikzpicture}[circuit]
+      \draw (0,4) to [pi] (2,4);
       \draw (0,3) to [cs] (2,3);
       \draw (0,2) to [va] (2,2);
       \draw (0,1) to [cv] (2,1);
@@ -55,7 +57,8 @@ Requires pgf with circuits library, e.g., version 2.10.
     \end{tikzpicture}
   \end{lstlisting}
 
-  \begin{tikzpicture}[circuit, scale=1]
+  \begin{tikzpicture}[circuit]
+    \draw (0,4) to [pi] (2,4);
     \draw (0,3) to [cs] (2,3);
     \draw (0,2) to [va] (2,2);
     \draw (0,1) to [cv] (2,1);
