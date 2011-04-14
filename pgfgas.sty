@@ -171,8 +171,11 @@
     \southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
     \northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
 
-    \pgfpathmoveto{\pgfpoint{\pgf@xa}{0}}
+    \pgfpathmoveto{\pgfpoint{\pgf@xb}{0}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@yb}}
     \pgfpathlineto{\pgfpoint{\pgf@xb}{0}}
+    \pgfpathclose
   }
 }
 \tikzset{circuit declare symbol = pi}
@@ -180,6 +183,8 @@
 \tikzset{pi graphic/.style= {
     transform shape,
     draw,
+    circuit symbol size=width .5 height .5,
+    fill,
     shape=pipe
   }
 }
