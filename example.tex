@@ -1,15 +1,89 @@
-\documentclass{minimal}
+%%
+%% Copyright 2011, Robert Schwarz <schwarz@zib.de>
+%%
+%% PGF Gas
+%%
+%% This program is free software: you can redistribute it and/or modify
+%% it under the terms of the GNU General Public License as published by
+%% the Free Software Foundation, either version 3 of the License, or
+%% (at your option) any later version.
+%%
+%% This program is distributed in the hope that it will be useful,
+%% but WITHOUT ANY WARRANTY; without even the implied warranty of
+%% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+%% GNU General Public License for more details.
+%%
+%% You should have received a copy of the GNU General Public License
+%% along with this program. If not, see <http:%%www.gnu.org/licenses/>.
+%%
+
+\documentclass[a4paper]{article}
+
+\usepackage{listings}
 
 \usepackage{tikz}
 \usetikzlibrary{circuits}
 \usepackage{pgfgas}
 
 \begin{document}
-  \begin{tikzpicture}[circuit, scale=2, circuit symbol unit=8pt]
+
+\title{PGF Gas\\Using TikZ circuits to draw gas networks.}
+\author{Robert Schwarz}
+\date{\today}
+\maketitle
+
+This package defines four new symbols for common elements in natural
+gas networks:
+
+\begin{itemize}
+\item[cs] Compressors
+\item[va] Valves
+\item[cv] Control valves
+\item[re] Resistors
+\end{itemize}
+
+Requires pgf with circuits library, e.g., version 2.10.
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}
+    \begin{tikzpicture}[circuit]
+      \draw (0,3) to [cs] (2,3);
+      \draw (0,2) to [va] (2,2);
+      \draw (0,1) to [cv] (2,1);
+      \draw (0,0) to [re] (2,0);
+    \end{tikzpicture}
+  \end{lstlisting}
+
+  \begin{tikzpicture}[circuit, scale=1]
+    \draw (0,3) to [cs] (2,3);
+    \draw (0,2) to [va] (2,2);
+    \draw (0,1) to [cv] (2,1);
+    \draw (0,0) to [re] (2,0);
+  \end{tikzpicture}
+  \caption{All the standard elements are available.}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{lstlisting}
+    \begin{tikzpicture}[circuit, scale=1.5, circuit symbol unit=10pt]
+      \draw (0,0)    to [cv={fill=yellow}] (5,0);
+      \draw (0,0)    to [cs={red}] (0,2);
+      \draw (0,2)    to [va={fill=green}] (3,2);
+      \draw (5,0)    to [re] (3,2);
+      \draw (0,0)    to [cs={fill=red}] (3,2);
+    \end{tikzpicture}
+  \end{lstlisting}
+
+  \begin{tikzpicture}[circuit, scale=1.5, circuit symbol unit=10pt]
     \draw (0,0)    to [cv={fill=yellow}] (5,0);
     \draw (0,0)    to [cs={red}] (0,2);
     \draw (0,2)    to [va={fill=green}] (3,2);
     \draw (5,0)    to [re] (3,2);
     \draw (0,0)    to [cs={fill=red}] (3,2);
   \end{tikzpicture}
+  \caption{They can also be colored, filled, scaled and are automatically placed and rotated.}
+\end{figure}
+
 \end{document}

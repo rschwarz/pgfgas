@@ -1,0 +1,17 @@
+===================================================
+PGF Gas - Using TikZ circuits to draw gas networks.
+===================================================
+
+(c) Robert Schwarz, 2011, <schwarz@zib.de>
+
+This package defines four new symbols for common elements in natural
+gas networks:
+
+ - Compressors    (cs)
+ - Valves         (va)
+ - Control valves (cv)
+ - Resistors      (re)
+
+See example.tex for an example of the usage.
+
+Requires pgf with circuits library, e.g., version 2.10
