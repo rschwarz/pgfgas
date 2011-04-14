@@ -1,0 +1,119 @@
+\ProvidesPackage{pgfgas}
+
+%%% compressor %%%
+\pgfdeclareshape{compressor}{
+  \inheritsavedanchors[from=rectangle]
+  \inheritanchorborder[from=rectangle]
+  \inheritanchor[from=rectangle]{center}
+  \inheritanchor[from=rectangle]{north}
+  \inheritanchor[from=rectangle]{south}
+  \inheritanchor[from=rectangle]{west}
+  \inheritanchor[from=rectangle]{east}
+  \backgroundpath{
+    % store lower right in xa/ya and upper right in xb/yb
+   \southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+   \northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+
+   \pgfpathmoveto{\pgfpoint{0.5*\pgf@xa}{0.866*\pgf@yb}}
+   \pgfpathlineto{\pgfpoint{\pgf@xb}{0}}
+
+   \pgfpathmoveto{\pgfpoint{0.5*\pgf@xa}{0.866*\pgf@ya}}
+   \pgfpathlineto{\pgfpoint{\pgf@xb}{0}}
+
+   \pgfpathcircle{\pgfpoint{0}{0}}{\pgf@yb}
+  }
+}
+\tikzset{circuit declare symbol = cs}
+\tikzset{set cs graphic = cs graphic}
+\tikzset{cs graphic/.style= {
+    transform shape,
+    draw,
+    thick,
+    shape=compressor,
+    circuit symbol size=width 3 height 3,
+  }
+}
+
+%%% resistor %%%
+\tikzset{circuit declare symbol = re}
+\tikzset{set re graphic = re graphic}
+\tikzset{re graphic/.style = {
+    transform shape,
+    draw,
+    thick,
+    shape=rectangle,
+    circuit symbol size=width 4 height 2
+  }
+}
+
+%%% valve %%%
+\pgfdeclareshape{valve}{
+  \inheritsavedanchors[from=rectangle]
+  \inheritanchorborder[from=rectangle]
+  \inheritanchor[from=rectangle]{center}
+  \inheritanchor[from=rectangle]{north}
+  \inheritanchor[from=rectangle]{south}
+  \inheritanchor[from=rectangle]{west}
+  \inheritanchor[from=rectangle]{east}
+  \backgroundpath{
+    % store lower right in xa/ya and upper right in xb/yb
+    \southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+    \northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathclose
+  }
+}
+\tikzset{circuit declare symbol = va}
+\tikzset{set va graphic = va graphic}
+\tikzset{va graphic/.style= {
+    transform shape,
+    draw,
+    thick,
+    circuit symbol size=width 3.5 height 2.5,
+    shape=valve
+  }
+}
+
+%%% controlvalve %%%
+\pgfdeclareshape{controlvalve}{
+  \inheritsavedanchors[from=rectangle]
+  \inheritanchorborder[from=rectangle]
+  \inheritanchor[from=rectangle]{center}
+  \inheritanchor[from=rectangle]{north}
+  \inheritanchor[from=rectangle]{south}
+  \inheritanchor[from=rectangle]{west}
+  \inheritanchor[from=rectangle]{east}
+  \backgroundpath{
+    % store lower right in xa/ya and upper right in xb/yb
+    \southwest \pgf@xa=\pgf@x \pgf@ya=\pgf@y
+    \northeast \pgf@xb=\pgf@x \pgf@yb=\pgf@y
+
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathclose
+
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@ya}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{0}}
+
+    \pgfpathmoveto{\pgfpoint{\pgf@xa}{\pgf@yb}}
+    \pgfpathlineto{\pgfpoint{\pgf@xb}{0}}
+  }
+}
+\tikzset{circuit declare symbol = cv}
+\tikzset{set cv graphic = cv graphic}
+\tikzset{cv graphic/.style= {
+    transform shape,
+    draw,
+    thick,
+    circuit symbol size=width 4 height 2,
+    shape=controlvalve
+  }
+}

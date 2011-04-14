@@ -1,0 +1,15 @@
+\documentclass{minimal}
+
+\usepackage{tikz}
+\usetikzlibrary{circuits}
+\usepackage{pgfgas}
+
+\begin{document}
+  \begin{tikzpicture}[circuit, scale=2, circuit symbol unit=8pt]
+    \draw (0,0)    to [cv={fill=yellow}] (5,0);
+    \draw (0,0)    to [cs={red}] (0,2);
+    \draw (0,2)    to [va={fill=green}] (3,2);
+    \draw (5,0)    to [re] (3,2);
+    \draw (0,0)    to [cs={fill=red}] (3,2);
+  \end{tikzpicture}
+\end{document}
